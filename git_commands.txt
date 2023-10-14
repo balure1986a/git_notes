@@ -1,0 +1,359 @@
+Git commands
+
+	• GIT STASH
+	==============
+	- >> git stash
+	- >> git stash save "optional message"
+	- >> git stash list
+	- >> git stash show stash@{0}
+	- >> git stash show -p stash@{0}
+	- >> git stash apply                 %applies the changes, and keep the copy
+	- >> git stash pop                  %applies the changes, and remove the copy
+	- >> git stash drop               %drop stash
+	- >> git stash clear                 % 
+	
+	• GIT ADD -  staging the files 
+	================
+	- >> git add                      % stage all files
+	- >> git add filename.cpp                 % stage a file.
+	- >> git add /path/to/the/foldername           % stage a folder
+	- >> git status
+	- >> git reset HEAD filename.cpp                           % unstage the accidentally staged file
+	- >> git reset HEAD /path/to/the/foldername          % unstage the accidentally staged folder
+	- >> git rm filename.cpp                      % remove file, and stage file.
+	- >> git rm -r /path/to/the/folder        % remove folder, and stage folder.
+
+	• GIT COMMIT
+	=================
+	- >> git commit -m "enter the message that describes the changes"
+	- >> git status
+	- >> git commit --amend -m "enter your corrected message"
+	- >> git log --oneline                      % simplified list of commits
+	- >> git log                                       % detailed list of commits.
+	- >> git log --stat                            % very detailed list of commits (including files changed)
+
+
+GIT BASICS
+============
+
+>> git --version
+>> git config -- global user.name "Chandra Shaker"
+>> git config --global user.email "csb@gmail.com"
+>> git config --list
+>> git help <verb> OR >> git verb --help
+
+INIT
+>> git init           # to start tracking a local project on 
+>> ls -la              # it will list all the files and repos, and create .git dir
+>> rm -rf .git      # to remove the .git dir if we don’t want git to track the repo
+
+>> git status
+
+>> touch .gitignore    # it creates a .gitignore file, add all that we want to ignore. Use wild card (* and ?) for files
+
+STAGE
+>> git add filename.ext             # add specific files to the staging area
+>> git add -A                               # add all files to the staging area
+>> git reset filename.ext           # remove specific files from staging area
+>> git reset                                  # remove all files from staging area
+
+COMMIT
+>> git commit -m "some useful commit messages"
+>> git log              # to see the commit history
+
+USECASE
+>> git clone <url> <where to clone>
+>> git remote -v             # lists info about repos
+>> git branch -a              # lists all branches in the repo (local and remote)
+
+COMMIT AND PULL/PUSH
+First make some changes in the code, and perform following.
+>> git diff
+>> git status
+>> git add -A
+>> git commit -m "add modified files"            # this is only local changes.
+>> git pull origin master      # it pulls all the changes on origin from other developers
+>> git push origin master
+
+WOKING ON SOME FEATURE
+>> git branch Chandra/feature
+>> git branch              # shows all the branches, and * in front of working branch
+>> git checkout Chandra/feature
+>> git branch
+Make some changes to the files
+>> git add -A
+>> git commit -m "modified files"        # committed to local branch, and has no effect on remote repo
+
+ASSOCIATE LOCAL BRANCH TO THE REMOTE BRANCH
+>> git push -u origin Chandra/feature     # later, we can try "git pull" or "git push" only
+>> git branch -a        # list all the branches
+
+MERGE A FEATURE BRANCH with MASTER
+>> git checkout master          # checkout the master
+>> git pull origin master         # pull all the changes from origin
+>> git branch --merged          # list branches which we have merged
+>> git merge Chandra/feature      # it merges the feature branch with master
+>> git push origin master     # push all changes to master branch on remote repo
+
+DELETING FEATURE BRANCH
+>> git branch --merged      # show all merged branches
+>> git branch -d Chandra/feature       # delete branch
+>> git branch -a     # lists all the branches
+>> git push origin --delete Chandra/feature     # delete from remote repo
+
+FASTER EXAMPLE
+>> git branch subtract        # create a NEW branch
+>> git checkout subtract     
+>> git add -A                    # Make some changes in the files, and STAGE them
+>> git commit -m "commit message"
+>> git push -u origin subtract
+>> git checkout master     # MERGE with remote master branch
+>> git pull origin master
+>> git merge subtract
+>> git push origin master
+>> git branch -d subtract         # DELETE branch
+>> git push origin --delete subtract
+
+
+• How to change branch
+=====================
+- Go to GIT BASH from Windows search.
+- Go to the folder where sandbox is there.
+- Check the end of the command prompt line to see the current branch.
+- To change the branch from current to others:
+	○ >> git checkout Robert/image_blackout
+	○ >> git pull
+- Done
+
+
+• How to change branch with modified files
+=====================================
+- We are currently on a feature branch.
+- >> git stash    % backup the changes file in other branch.
+- >> git checkout <new branch name>
+- >> git pull       %if there are any new commits.
+- Done
+
+
+• How to get the branch from one system1 to system2
+============================================
+- asdf
+
+
+• How to merge the develop/master
+================================
+- CURRENTLY WE ARE SOME FEATURE BRANCH
+- >> git checkout Chandra/FeatureBranch
+- >> git merge origin/develop/master
+- >> git merge --abort                  // to abort the merging if there are any conflicts. Else resolve the conflicts and merge.
+OR
+- git checkout develop 
+- git pull 
+- git checkout Chandra/FeatureBranch
+- git rebase develop
+OR
+- git checkout develop
+- git pull -p
+- git checkout feature_branch
+- git merge develop
+- git push origin feature_branch
+
+• How to get develop and branchout and merge our changes
+================================================
+- >> git status
+- >> git stash                # stash the work
+- >> git stash list
+- >> git status
+- >> git merge origin/develop    
+- >> gitk                      # graphical tool
+- >> git checkout -b Chandra/<branchname>
+- >> git stash apply
+
+• How to create new branch, and push our changes
+=========================================
+- >> git status
+- >> git checkout -b Chandra/RTEFrameTest develop    # creates branch
+- >> git status
+- >> git add                       # add required files
+- >> git status
+- >> git commit -m "added files related to RTE Frame Test"
+- >> git push <remote-branch> <my-branch-name>          
+  # git push origin Chandra/RTEFrameTest
+
+
+- How to change branch
+=====================
+- Go to GIT BASH from Windows search.
+- Go to the folder where sandbox is there.
+- Check the end of the command prompt line to see the current branch.
+- To change the branch from current to others:
+	○ >> git checkout Robert/image_blackout
+	○ >> git pull
+- Done
+
+
+• How to change branch with modified files
+=====================================
+- >> git stash    % backup the changes file in other branch.
+- >> git checkout <new branch name>
+- >> git pull       %if there are any new commits.
+
+
+
+
+MERGE A BRANCH
+========================
+WE ARE AT MASTER BRANCH CURRENTLY.
+
+BRANCHOUT A NEW BRANCH
+>> git checkout -b branch1
+Or 
+>> git branch branch1
+>> git checkout branch1
+
+DO SOME CHANGES
+>> vi filename.cpp
+>> git commit -a -m "some commit message"
+
+SWITCH THE BRANCH
+>> git checkout master
+
+BRANCHOUT/EDIT/COMMIT
+>> git checkout -b branch2
+>> vi filename.cpp
+>> git commit -a -m "commit msg"
+
+MERGE BRANCH2 to MASTER and DELETE BRANCH2
+>> git checkout master  # checkout the branch you wish to merge into
+>> git merge branch2    # merge branch2 into master
+>> git branch -d branch2      # delete branch2
+
+
+
+MERGE CONFLICTS
+================
+>> git mergetool    # show graphical tool to resolve issues.
+Or
+>> git mergetool --tool=kdiff3         // set the specific tool to view the differences
+>> git status
+>> git commit
+
+Left window: content from current checkout branch
+Right window: content from remote branch which we are trying to merge
+Center window: content from common ancestorg
+Bottom window: content after the merge.
+
+
+
+
+
+
+
+GIT STASH
+========
+>> git status
+>> git stash / git stash push / git stash save            # save the work temporarily
+>> git status          # the working dir would be clean now
+>> git stash list     # to see all the stashes
+>> git stash apply     # reapply the stashed work
+>> git stash apply stash@{2}      # reapply older stashes
+>> git stash apply --index            # reapply the staged changes
+>> git stash drop stash@{0}        # remove the stash.
+>> git stash pop                            # reapply and drop the stash
+>> git stash show -p stash@{1}                 # to view the changed contents
+>> git stash show -p stash@{1} | view -       # to view the changed contents
+
+GIT STASH - some more
+================
+>> git status -s
+>> git stash --keep-index        # only include all staged content in stash, and leave it in index
+>> git status -s
+
+>> git stash -u                          # include untracked files also in stash
+
+>> git stash --patch                # not stash everything that is modified, but prompt which to include
+
+
+ORIGIN, MASTER, DEVELOP, FEATURE Branches.
+ ============================================
+>> origin: 
+a name of the remote branch. All team members use it.
+
+>> master:
+A local branch name where we first initiate git, and then git commits
+ 
+>> origin/master: 
+remote branch, with a copy of local branch named 'master' on the remote named 'origin'
+
+
+GIT BRANCH DELETE - LOCALLY AND REMOTELY
+===============================================
+>> git push -d <<remote-name>> <<branch-name>>          # delete REMOTELY
+	e.g. git push -d origin name/of/the/branch
+
+>> git branch -d << branch-name>>               # delete LOCALLY, only if the <<branch-name>> is already merged upstream
+	e.g. git branch -d name/of/the/branch          # ERROR, the branch is not merged yet
+	
+>> git branch -D << branch-name>>               # delete LOCALLY FORCIBLY, if the <<branch-name>> is not merged upstream
+	e.g. git branch -D name/of/the/branch          # delete locally forcibly
+
+
+GIT COMMAND -  some more
+===========================
+>> git clean -f -d           // Delete UNTRACKED directories
+>> git add -a                 // STAGE ALL the modified files for the commit
+>> git reset                    // UN-STAGE ALL the modified files. // UNDO the GIT ADD command executed previously
+>> git reset <file>         // UN-STAGE the modified files.         // UNDO the GIT ADD command executed previously
+>> git checkout <file>     // UNDO the changes done 
+
+
+Display the list of ignored files (ignored because of .gitignore file)
+====================================================
+>> git status --ignored 
+>> git add -A -f                       (add ALL file with FORCE)
+
+
+GIT STASH
+=======================
+git stash list
+git stash
+git stash -u
+git stash apply stash@{0}
+git reset
+
+cat .git/config
+git config --global user.name "FIRST_NAME LAST_NAME"
+git config --global user.email "MY_NAME@example.com"
+git config --global credential.helper store/wincred
+
+
+
+GIT CHECKOUT - Checkout a specific commit
+========================
+>> git checkout -b <sandbox/jiraid/newbranch>
+>> git log
+>> git checkout <commit-id>             // checkout a commit id (59714649) for grappa_ti_bringup
+>> git checkout tags/<tag> -b <branch>         // checkout a tag (v5.0.0-mixedcnn-dev7), 'v' is compulsory
+
+
+
+smart git
+==========
+
+- clone = 
+	repo -> clone -> enter repo url -> keep default setting -> enter local dir
+- tracking branch = 
+	set the branch that needs to be tracked.
+- commit = 
+	set to Stage entry -> commit local (write commit message)
+- pull = 
+	pull updates from other colleagues.
+- stash = 
+	local changes which are not ready to commit, but can be saved - Local -> Stash All.
+- merge = 
+	merge another branch in the currently checkedout branch.
+- create branch = 
+	Branch -> Add Branch.
+- checkout/change branch = 
+	rightclick -> checkout -> save stash.
+
